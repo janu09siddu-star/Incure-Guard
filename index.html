@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InsureGuard - Smart Insurance System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <h2>🛡️ InsureGuard</h2>
+            <small>SMART INSURANCE SYSTEM</small>
+        </div>
+
+        <p>MAIN MENU</p>
+        <nav>
+            <button class="nav-link active" data-page="dashboard">▦ Dashboard</button>
+            <button class="nav-link" data-page="customers">♙ Customers</button>
+            <button class="nav-link" data-page="policies">▤ Policies</button>
+            <button class="nav-link" data-page="claims">▣ Claims</button>
+        </nav>
+
+        <p>RISK MANAGEMENT</p>
+        <nav>
+            <button class="nav-link" data-page="fraud">⚠ Fraud Detection</button>
+            <button class="nav-link" data-page="alerts">♢ Fraud Alerts</button>
+            <button class="nav-link" data-page="decisions">✓ Claim Decisions</button>
+        </nav>
+
+        <p>ANALYTICS</p>
+        <nav>
+            <button class="nav-link" data-page="reports">▥ Reports</button>
+        </nav>
+
+        <div class="admin">
+            <div class="avatar">A</div>
+            <div>
+                <strong>Administrator</strong>
+                <small>System Admin</small>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <h2 id="page-heading">Dashboard</h2>
+                <p id="page-subheading">Welcome to InsureGuard</p>
+            </div>
+            <span>🟢 System Online</span>
+        </header>
+
+        <div class="content">
+
+            <section id="dashboard" class="page active-page">
+
+                <div class="welcome-banner">
+                    <h1>Welcome to InsureGuard 👋</h1>
+                    <p>Manage insurance policies, claims and suspicious activities.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <p>Total Customers</p>
+                        <h2 id="totalCustomers">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <p>Active Policies</p>
+                        <h2 id="totalPolicies">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <p>Total Claims</p>
+                        <h2 id="totalClaims">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <p>Approved Claims</p>
+                        <h2 id="approvedClaims">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <p>Suspicious Claims</p>
+                        <h2 id="suspiciousClaims">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <p>Pending Claims</p>
+                        <h2 id="pendingClaims">0</h2>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3>Claim Risk Overview</h3>
+
+                <div class="risk-row">
+                    <span>Low Risk</span>
+                    <strong id="lowRiskCount">0</strong>
+                </div>
+                <div class="progress">
+                    <div id="lowRiskBar" class="progress-fill low-fill"></div>
+                </div>
+
+                <div class="risk-row">
+                    <span>Medium Risk</span>
+                    <strong id="mediumRiskCount">0</strong>
+                </div>
+                <div class="progress">
+                    <div id="mediumRiskBar" class="progress-fill medium-fill"></div>
+                </div>
+
+                <div class="risk-row">
+                    <span>High Risk</span>
+                    <strong id="highRiskCount">0</strong>
+                </div>
+                <div class="progress">
+                    <div id="highRiskBar" class="progress-fill high-fill"></div>
+                </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Recent Claims</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Claim ID</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentClaims"></tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <section id="customers" class="page">
+                <h2>Customer Management</h2>
+
+                <div class="panel">
+                    <h3>Add New Customer</h3>
+                    <form id="customerForm">
+                        <input id="customerName" placeholder="Customer Name" required>
+                        <input id="customerEmail" type="email" placeholder="Email" required>
+                        <input id="customerPhone" placeholder="10-digit Phone Number" pattern="[0-9]{10}" required>
+                        <input id="customerAddress" placeholder="Address" required>
+                        <button type="submit">Add Customer</button>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <h3>Customer Records</h3>
+                    <input id="customerSearch" placeholder="Search customers...">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customerTable"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="policies" class="page">
+                <h2>Policy Management</h2>
+
+                <div class="panel">
+                    <h3>Create New Policy</h3>
+                    <form id="policyForm">
+                        <select id="policyCustomer" required>
+                            <option value="">Select Customer</option>
+                        </select>
+
+                        <select id="policyType" required>
+                            <option value="">Select Policy Type</option>
+                            <option>Health Insurance</option>
+                            <option>Life Insurance</option>
+                            <option>Vehicle Insurance</option>
+                            <option>Property Insurance</option>
+                            <option>Travel Insurance</option>
+                        </select>
+
+                        <input id="policyCoverage" type="number" min="1" placeholder="Coverage Amount" required>
+                        <input id="policyPremium" type="number" min="1" placeholder="Premium Amount" required>
+                        <label>Start Date</label>
+                        <input id="policyStart" type="date" required>
+                        <label>End Date</label>
+                        <input id="policyEnd" type="date" required>
+
+                        <button type="submit">Create Policy</button>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <h3>Policy Records</h3>
+                    <input id="policySearch" placeholder="Search policies...">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Policy ID</th>
+                                <th>Customer</th>
+                                <th>Type</th>
+                                <th>Coverage</th>
+                                <th>Premium</th>
+                                <th>Validity</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="policyTable"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="claims" class="page">
+                <h2>Claim Management</h2>
+
+                <div class="panel">
+                    <h3>Submit New Claim</h3>
+                    <form id="claimForm">
+                        <select id="claimCustomer" required>
+                            <option value="">Select Customer</option>
+                        </select>
+
+                        <select id="claimPolicy" required>
+                            <option value="">Select Policy</option>
+                        </select>
+
+                        <input id="claimAmount" type="number" min="1" placeholder="Claim Amount" required>
+
+                        <label>Incident Date</label>
+                        <input id="claimDate" type="date" required>
+
+                        <textarea id="claimDescription" placeholder="Claim Description" required></textarea>
+
+                        <button type="submit">Submit Claim</button>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <h3>All Claims</h3>
+                    <input id="claimSearch" placeholder="Search claims...">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Claim ID</th>
+                                <th>Customer</th>
+                                <th>Policy ID</th>
+                                <th>Amount</th>
+                                <th>Risk</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="claimTable"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="fraud" class="page">
+                <h2>Fraud Detection Centre</h2>
+                <div class="panel">
+                    <p>Identify potentially suspicious claims using predefined rules.</p>
+                    <p>Flagged claims require administrator investigation.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Claim ID</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Risk Score</th>
+                                <th>Risk Level</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fraudTable"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="alerts" class="page">
+                <h2>Fraud Alerts</h2>
+                <div id="alertList"></div>
+            </section>
+
+            <section id="decisions" class="page">
+                <h2>Claim Decisions</h2>
+                <div class="panel">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Claim ID</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Risk Level</th>
+                                <th>Reason</th>
+                                <th>Decision</th>
+                            </tr>
+                        </thead>
+                        <tbody id="decisionTable"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="reports" class="page">
+                <h2>Reports & Analytics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <p>Total Customers</p>
+                        <h2 id="reportCustomers">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <p>Total Policies</p>
+                        <h2 id="reportPolicies">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <p>Total Claims</p>
+                        <h2 id="reportClaims">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <p>Total Claim Value</p>
+                        <h2 id="reportAmount">₹0</h2>
+                    </div>
+                </div>
+                <div class="panel">
+                    <h3>Claim Status Summary</h3>
+                    <div id="reportSummary"></div>
+                    <button onclick="exportClaims()">Export Claims CSV</button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
